@@ -22,8 +22,6 @@ trait HasProcess
 
     public function getProcessCommand(): string
     {
-        $delimiter = 'EOF-LARAVEL-SERVER-MONITOR';
-
         $definition = $this->getDefinition();
 
         $portArgument = empty($this->host->port) ? '' : "-p {$this->host->port}";
@@ -31,10 +29,7 @@ trait HasProcess
         $sshCommandPrefix = config('server-monitor.ssh_command_prefix');
         $sshCommandSuffix = config('server-monitor.ssh_command_suffix');
 
-        return "ssh {$sshCommandPrefix} {$this->getTarget()} {$portArgument} {$sshCommandSuffix} 'bash -se <<$delimiter".PHP_EOL
-            .'set -e'.PHP_EOL
-            .$definition->command().PHP_EOL
-            .$delimiter."'";
+        return "ssh {$sshCommandPrefix} {$this->getTarget()} {$portArgument} {$sshCommandSuffix} '" . $definition->command().PHP_EOL . "'";
     }
 
     protected function getTarget(): string
