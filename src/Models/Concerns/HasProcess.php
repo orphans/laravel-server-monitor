@@ -40,8 +40,7 @@ trait HasProcess
         if ($sshCommandSuffix) {
             $result .= ' '.$sshCommandSuffix;
         }
-        $result .= " '".$definition->command().PHP_EOL
-            .$delimiter."'";
+        $result .= " '".$definition->command().PHP_EOL."'";
 
         return $result;
     }
