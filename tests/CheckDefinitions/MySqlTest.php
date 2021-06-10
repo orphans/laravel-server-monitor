@@ -2,11 +2,10 @@
 
 namespace Spatie\ServerMonitor\CheckDefinitions\Test;
 
-use Spatie\ServerMonitor\Models\Check;
-use Spatie\ServerMonitor\Test\TestCase;
 use Spatie\ServerMonitor\CheckDefinitions\MySql;
+use Spatie\ServerMonitor\Models\Check;
 use Spatie\ServerMonitor\Models\Enums\CheckStatus;
-use Spatie\ServerMonitor\CheckDefinitions\Elasticsearch;
+use Spatie\ServerMonitor\Test\TestCase;
 
 class MySqlTest extends TestCase
 {
@@ -16,7 +15,7 @@ class MySqlTest extends TestCase
     /** @var \Spatie\ServerMonitor\Models\Check */
     protected $check;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

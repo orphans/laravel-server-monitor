@@ -4,15 +4,15 @@ namespace Spatie\ServerMontior\Test\Events;
 
 use Event;
 use Illuminate\Support\Facades\Artisan;
-use Spatie\ServerMonitor\Test\TestCase;
 use Spatie\ServerMonitor\Events\CheckRestored;
+use Spatie\ServerMonitor\Test\TestCase;
 
 class CheckRestoredTest extends TestCase
 {
     /** @var \Spatie\ServerMonitor\Models\Check */
     protected $check;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

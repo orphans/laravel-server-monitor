@@ -3,17 +3,17 @@
 namespace Spatie\ServerMonitor\Test\Models;
 
 use Carbon\Carbon;
-use Spatie\ServerMonitor\Models\Check;
-use Spatie\ServerMonitor\Test\TestCase;
 use Spatie\ServerMonitor\CheckDefinitions\Diskspace;
 use Spatie\ServerMonitor\Exceptions\InvalidCheckDefinition;
+use Spatie\ServerMonitor\Models\Check;
+use Spatie\ServerMonitor\Test\TestCase;
 
 class CheckTest extends TestCase
 {
     /** @var \Spatie\ServerMonitor\Models\Check */
     protected $check;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

@@ -2,6 +2,59 @@
 
 All notable changes to `laravel-server-monitor` will be documented in this file
 
+## 1.9.3 - 2021-02-23
+
+- add support for PHP 8
+
+## 1.9.2 - 2020-09-09
+
+- add support for Laravel 8
+
+## 1.9.1 - 2020-08-20
+
+- allow Guzzle 7
+
+## 1.9.0 - 2020-03-03
+
+- add support for Laravel 7
+
+## 1.8.1 - 2019-09-20
+
+- `next_run_in_minutes` can be set in config 
+
+## 1.8.0 - 2019-09-04
+
+- add support for Laravel 6
+
+## 1.7.0 - 2019-02-27
+
+- drop support for Laravel 5.7 and below
+- drop support for PHP 7.1 and below
+
+## 1.6.2 - 2019-02-27
+
+- add support for Laravel 5.8
+
+## 1.6.1 - 2019-02-01
+
+- use Arr:: and Str:: functions
+
+## 1.6.0 - 2019-01-31
+
+- add `dump-checks` command
+
+## 1.5.0 - 2019-01-10
+
+- allow elastic search check to check other ips
+
+## 1.4.2 - 2019-01-10
+
+- fix memcached check
+
+## 1.4.1 - 2018-08-27
+
+- add support for Laravel 5.7
+
 ## 1.4.0 - 2018-07-02
 
 - add `ssh_command_prefix` to config file

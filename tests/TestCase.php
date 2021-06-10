@@ -4,13 +4,14 @@ namespace Spatie\ServerMonitor\Test;
 
 use Artisan;
 use Carbon\Carbon;
-use Spatie\ServerMonitor\Models\Host;
-use Spatie\ServerMonitor\Models\Check;
-use Symfony\Component\Process\Process;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Str;
 use Orchestra\Testbench\TestCase as Orchestra;
+use Spatie\ServerMonitor\Models\Check;
 use Spatie\ServerMonitor\Models\Enums\CheckStatus;
+use Spatie\ServerMonitor\Models\Host;
 use Spatie\ServerMonitor\ServerMonitorServiceProvider;
+use Symfony\Component\Process\Process;
 
 abstract class TestCase extends Orchestra
 {
@@ -20,7 +21,7 @@ abstract class TestCase extends Orchestra
     /** @var ?string */
     protected $consoleOutputCache;
 
-    public function setUp()
+    public function setUp(): void
     {
         Carbon::setTestNow(Carbon::create(2016, 1, 1, 00, 00, 00));
 
@@ -46,6 +47,10 @@ abstract class TestCase extends Orchestra
      */
     protected function getEnvironmentSetUp($app)
     {
+        foreach ($app['config']->get('server-monitor.notifications.notifications') as $class => $notification) {
+            $app['config']->set('server-monitor.notifications.notifications', []);
+        }
+
         $app['config']->set('database.default', 'sqlite');
 
         $app['config']->set('mail.driver', 'log');
@@ -99,7 +104,7 @@ abstract class TestCase extends Orchestra
 
     protected function getSuccessfulProcessWithOutput(string $output = 'my output'): Process
     {
-        $process = new Process("echo {$output}");
+        $process = Process::fromShellCommandline("echo {$output}");
 
         $process->start();
 
@@ -111,7 +116,7 @@ abstract class TestCase extends Orchestra
 
     protected function getFailedProcess(): Process
     {
-        $process = new Process('blablabla');
+        $process = Process::fromShellCommandline('blabla');
 
         $process->start();
 
@@ -123,7 +128,7 @@ abstract class TestCase extends Orchestra
 
     protected function assertStringContains($needle, $haystack)
     {
-        $this->assertTrue(str_contains($haystack, $needle), "String `{$haystack}` did not contain `{$needle}`");
+        $this->assertTrue(Str::contains($haystack, $needle), "String `{$haystack}` did not contain `{$needle}`");
     }
 
     protected function letSshServerRespondWithDiskspaceUsagePercentage(int $diskspaceUsagePercentage)
@@ -145,7 +150,7 @@ abstract class TestCase extends Orchestra
         }
         $output = $this->getArtisanOutput();
         foreach ($searchStrings as $searchString) {
-            $this->assertContains((string) $searchString, $output);
+            $this->assertStringContainsString((string) $searchString, $output);
         }
     }
 
@@ -159,7 +164,7 @@ abstract class TestCase extends Orchestra
         }
         $output = $this->getArtisanOutput();
         foreach ($searchStrings as $searchString) {
-            $this->assertNotContains((string) $searchString, $output);
+            $this->assertStringNotContainsString((string) $searchString, $output);
         }
     }
 
@@ -177,7 +182,7 @@ abstract class TestCase extends Orchestra
 
     protected function skipIfDummySshServerIsNotRunning()
     {
-        if ((new Process('ssh localhost -p 65000 "echo"'))->run() === 255) {
+        if (Process::fromShellCommandline('ssh localhost -p 65000 "echo"')->run() === 255) {
             $this->markTestSkipped('Dummy SSH server is not running.');
         }
     }

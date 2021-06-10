@@ -2,9 +2,9 @@
 
 namespace Spatie\ServerMonitor\Test;
 
-use Spatie\ServerMonitor\Models\Check;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Notification;
+use Spatie\ServerMonitor\Models\Check;
 use Spatie\ServerMonitor\Models\Enums\CheckStatus;
 use Spatie\ServerMonitor\Notifications\Notifications\CheckFailed;
 
@@ -13,7 +13,7 @@ class IntegrationTest extends TestCase
     /** @var \Spatie\ServerMonitor\Models\Host */
     protected $host;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -64,6 +64,11 @@ class IntegrationTest extends TestCase
     /** @test */
     public function it_will_throttle_failed_notifications()
     {
+        $this->app['config']->set(
+            'server-monitor.notifications.notifications.'.CheckFailed::class,
+            ['slack']
+        );
+
         Notification::fake();
 
         $this->letSshServerRespondWithDiskspaceUsagePercentage(95);
