@@ -4,8 +4,8 @@ namespace Spatie\ServerMonitor\CheckDefinitions;
 
 use Exception;
 use Spatie\ServerMonitor\Models\Check;
-use Symfony\Component\Process\Process;
 use Spatie\ServerMonitor\Models\Enums\CheckStatus;
+use Symfony\Component\Process\Process;
 
 abstract class CheckDefinition
 {
@@ -67,7 +67,7 @@ abstract class CheckDefinition
     public function performNextRunInMinutes(): int
     {
         if ($this->check->hasStatus(CheckStatus::SUCCESS)) {
-            return 10;
+            return (int) config('server-monitor.next_run_in_minutes');
         }
 
         return 0;

@@ -4,10 +4,10 @@ namespace Spatie\ServerMonitor\Test\Commands;
 
 use Artisan;
 use Carbon\Carbon;
-use Spatie\ServerMonitor\Models\Host;
 use Spatie\ServerMonitor\Models\Check;
-use Spatie\ServerMonitor\Test\TestCase;
 use Spatie\ServerMonitor\Models\Enums\CheckStatus;
+use Spatie\ServerMonitor\Models\Host;
+use Spatie\ServerMonitor\Test\TestCase;
 
 class ListChecksTest extends TestCase
 {
@@ -151,7 +151,8 @@ class ListChecksTest extends TestCase
                     'last_run_message' => 'check-message',
                     'custom_properties' => [],
                 ]);
-            })->merge(collect($unhealthyChecks)
+            })->merge(
+                collect($unhealthyChecks)
                 ->map(function (string $checkName) {
                     return new Check([
                         'type' => $checkName,

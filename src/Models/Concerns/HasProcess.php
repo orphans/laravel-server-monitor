@@ -2,15 +2,15 @@
 
 namespace Spatie\ServerMonitor\Models\Concerns;
 
-use Symfony\Component\Process\Process;
 use Spatie\ServerMonitor\Manipulators\Manipulator;
+use Symfony\Component\Process\Process;
 
 trait HasProcess
 {
     public function getProcess(): Process
     {
         return blink()->once("process.{$this->id}", function () {
-            $process = new Process($this->getProcessCommand());
+            $process = Process::fromShellCommandline($this->getProcessCommand());
 
             $process->setTimeout($this->getDefinition()->timeoutInSeconds());
 
@@ -29,7 +29,21 @@ trait HasProcess
         $sshCommandPrefix = config('server-monitor.ssh_command_prefix');
         $sshCommandSuffix = config('server-monitor.ssh_command_suffix');
 
-        return "ssh {$sshCommandPrefix} {$this->getTarget()} {$portArgument} {$sshCommandSuffix} '" . $definition->command().PHP_EOL . "'";
+        $result = 'ssh';
+        if ($sshCommandPrefix) {
+            $result .= ' '.$sshCommandPrefix;
+        }
+        $result .= ' '.$this->getTarget();
+        if ($portArgument) {
+            $result .= ' '.$portArgument;
+        }
+        if ($sshCommandSuffix) {
+            $result .= ' '.$sshCommandSuffix;
+        }
+        $result .= " '".$definition->command().PHP_EOL
+            .$delimiter."'";
+
+        return $result;
     }
 
     protected function getTarget(): string

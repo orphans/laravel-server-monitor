@@ -1,20 +1,22 @@
 # An easy to use powerful server monitor
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/laravel-server-monitor.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-server-monitor)
-[![Build Status](https://img.shields.io/travis/spatie/laravel-server-monitor/master.svg?style=flat-square)](https://travis-ci.org/spatie/laravel-server-monitor)
-[![Quality Score](https://img.shields.io/scrutinizer/g/spatie/laravel-server-monitor.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/laravel-server-monitor)
-[![StyleCI](https://styleci.io/repos/82051379/shield?branch=master)](https://styleci.io/repos/82051379)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/spatie/laravel-server-monitor/run-tests?label=tests)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-server-monitor.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-server-monitor)
 
 We all dream of servers that need no maintenance at all. But unfortunately in reality this is not the case. Disks can get full, processes can crash, the server can run out of memory...
 
 This package keeps an eye on the health of all your servers. There are a few [checks that come out of the box](https://docs.spatie.be/laravel-server-monitor/v1/monitoring-basics/built-in-checks). [Adding new checks](https://docs.spatie.be/laravel-server-monitor/v1/monitoring-basics/writing-your-own-checks) is a breeze.
 
-When something goes wrong it can [notify you](https://docs.spatie.be/laravel-server-monitor/v1/monitoring-basics/notifications-and-events) via Slack or mail. Here's how a Slack notification look like:
+When something goes wrong it can [notify you](https://docs.spatie.be/laravel-server-monitor/v1/monitoring-basics/notifications-and-events) via Slack or mail.
 
-<img src="https://docs.spatie.be/images/server-monitor/check-failed.jpg" class="screenshot -slack">
+## Support us
 
-Behind the scenes [Laravel's native notification system](https://laravel.com/docs/5.4/notifications) is leveraged so you can use one of the [many notification drivers](http://laravel-notification-channels.com/).
+[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/laravel-server-monitor.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/laravel-server-monitor)
+
+We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
+
+We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
 
 ## Documentation
 
@@ -144,6 +146,9 @@ return [
 ];
 ```
 
+## Need a UI?
+
+The package doesn't come with any screens out of the box. You may use the [Nova package by @paras-malhotra](https://github.com/insenseanalytics/nova-server-monitor) for monitoring servers on [Laravel Nova](https://nova.laravel.com).
 
 ## Changelog
 
@@ -173,27 +178,12 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 If you discover any security related issues, please email freek@spatie.be instead of using the issue tracker.
 
-## Postcardware
-
-You're free to use this package, but if it makes it to your production environment we highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using.
-
-Our address is: Spatie, Samberstraat 69D, 2060 Antwerp, Belgium.
-
-We publish all received postcards [on our company website](https://spatie.be/en/opensource/postcards).
-
 ## Credits
 
 - [Freek Van der Herten](https://github.com/freekmurze)
 - [All Contributors](../../contributors)
 
 The code to execute commands on a remote server was copied from [Envoy](https://github.com/laravel/envoy).
-
-## Support us
-
-Spatie is a webdesign agency based in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
-
-Does your business depend on our contributions? Reach out and support us on [Patreon](https://www.patreon.com/spatie). 
-All pledges will be dedicated to allocating workforce on maintenance and new awesome stuff.
 
 ## License
 
